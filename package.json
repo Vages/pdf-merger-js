@@ -6,13 +6,21 @@
   "engines": {
     "node": ">=16"
   },
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "browser": "./browser.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "require": {
+      "default": "./dist/index.cjs"
+    },
+    "import": {
+      "default": "./dist/index.mjs"
+    }
+  },
   "bin": {
-    "pdf-merge": "cli.js"
+    "pdf-merge": "./dist/cli.js"
   },
   "scripts": {
+    "build": "pkgroll",
     "standard": "standard",
     "standard:fix": "standard --fix",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest --detectOpenHandles",
@@ -33,7 +41,8 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^11.1.0",
-    "pdf-lib": "^1.17.1"
+    "pdf-lib": "^1.17.1",
+    "pkgroll": "^2.12.2"
   },
   "devDependencies": {
     "fs-extra": "^11.2.0",
